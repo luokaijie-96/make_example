@@ -54,6 +54,7 @@ $(TARGETNAME):$(OBJFILE)
 	@echo "linked ok," $(TARGETNAME) "has been created"
 	@echo ""
 	@echo $(TMPBUILDTM)
+	@echo $(MAKEFILE_LIST)
 #@echo $(SRCFILE)
 #@echo $(OBJFILE)
 
