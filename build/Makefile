@@ -1,5 +1,5 @@
 #引用其他文件
-include srcpathconfig.mk
+include srcpathconfig.mk  ../include_flag.mk
 
 #时间信息
 tmpbuildtm := `date |sed 's/ /_/g'`
@@ -16,6 +16,9 @@ else
 COMPILEMACRO += COMPILER_IS_LINUX_GCC MACRO_DEF
 endif
 
+ifeq ($(INCLUDE_FLAG),1)
+COMPILEMACRO += INCLUDE_FLAG
+endif	
 
 #循环获取源文件和中间件
 SRCFILE := $(foreach dirpath,$(SRCCODEDIRS),$(wildcard $(addprefix $(dirpath)/*,.c)))
@@ -62,9 +65,15 @@ $(TARGETNAME):$(OBJFILE)
 	@echo "end   " $< "......compiled ok"
 	@echo ""
 
-.PHONY: arm clean
+.PHONY: arm clean help
 
 arm:$(TARGETNAME)
 
 clean:
 	@-$(RM) $(RMFLAGS) $(TARGETNAME) $(OBJFILE) $(OUTPUTDIR)
+
+
+help:
+	@echo "Usage:"
+	@echo "       make"
+	@echo "       make arm"
