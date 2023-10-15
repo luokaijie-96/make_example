@@ -42,7 +42,12 @@ RMFLAGS := -rf
 #目标文件    
 TARGETNAME = app
 
-$(TARGETNAME):$(OBJFILE)
+
+all:libs $(TARGETNAME) 
+
+
+
+$(TARGETNAME):$(OBJFILE) 
 	@mkdir -p $(OUTPUTDIR)
 	@echo ""
 	@echo "all files have been compiled , now begin to link every obj for excutable file"
@@ -55,6 +60,7 @@ $(TARGETNAME):$(OBJFILE)
 	@echo ""
 	@echo $(TMPBUILDTM)
 	@echo $(MAKEFILE_LIST)
+#@echo $(MAKE)
 #@echo $(SRCFILE)
 #@echo $(OBJFILE)
 #@echo "ldd $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION):"
@@ -68,19 +74,23 @@ $(TARGETNAME):$(OBJFILE)
 	@echo "end   " $< "......compiled ok"
 	@echo ""
 
-.PHONY: all arm clean help libs
+
+
+.PHONY: all arm clean help libs cleanlibs
 
 arm:$(TARGETNAME)
-all:$(TARGETNAME)
 
 
 libs :
 	@cd  $(LIBFILEDIRS); make; cd -	
 
 
-clean:
+clean: cleanlibs
 	@-$(RM) $(RMFLAGS) $(TARGETNAME) $(OBJFILE) $(OUTPUTDIR)
+
+cleanlibs :
 	@cd  $(LIBFILEDIRS);  make clean; cd -	
+	
 
 
 help:
