@@ -57,6 +57,8 @@ $(TARGETNAME):$(OBJFILE)
 	@echo $(MAKEFILE_LIST)
 #@echo $(SRCFILE)
 #@echo $(OBJFILE)
+#@echo "ldd $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION):"
+#@ldd $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION)
 
 %.o: %.c
 	@echo ""
@@ -66,15 +68,24 @@ $(TARGETNAME):$(OBJFILE)
 	@echo "end   " $< "......compiled ok"
 	@echo ""
 
-.PHONY: arm clean help
+.PHONY: all arm clean help libs
 
 arm:$(TARGETNAME)
+all:$(TARGETNAME)
+
+
+libs :
+	@cd  $(LIBFILEDIRS); make; cd -	
+
 
 clean:
 	@-$(RM) $(RMFLAGS) $(TARGETNAME) $(OBJFILE) $(OUTPUTDIR)
+	@cd  $(LIBFILEDIRS);  make clean; cd -	
 
 
 help:
 	@echo "Usage:"
 	@echo "       make"
 	@echo "       make arm"
+	@echo "       make libs"
+	@echo "       make all"

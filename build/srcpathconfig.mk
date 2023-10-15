@@ -14,5 +14,5 @@ LIBFILEDIRS := ../lib/libs
 LIBHEADDIRS := ../lib/inc/
 
 #lib文件
-LIBFILE := #-lmylib
+LIBFILE := -lmylib
 

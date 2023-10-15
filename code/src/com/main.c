@@ -13,6 +13,6 @@ int main()
 #ifdef INCLUDE_FLAG
     printf("include instruction flag!\r\n");
 #endif
-    //mylib();
+    mylib();
     return 0; 
 }
