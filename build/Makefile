@@ -49,6 +49,9 @@ all:libs $(TARGETNAME)
 
 $(TARGETNAME):$(OBJFILE) 
 	@mkdir -p $(OUTPUTDIR)
+#@echo "$$< : $<"
+#@echo "$$@ : $@"
+#@echo "$$^ : $^"
 	@echo ""
 	@echo "all files have been compiled , now begin to link every obj for excutable file"
 	@echo ""
@@ -68,6 +71,9 @@ $(TARGETNAME):$(OBJFILE)
 
 %.o: %.c
 	@echo ""
+#@echo "$$< : $<"
+#@echo "$$@ : $@"
+#@echo "$$^ : $^"
 	@echo "start " $< "......compiling"
 	@$(CC) $(CURCMPLMACRO) $(CFLAGS) $(CURSRCHEADDIRS) $(CURLIBHEADDIRS) $< -o $@
 	@echo "created " $@
