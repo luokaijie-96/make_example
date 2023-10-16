@@ -49,6 +49,7 @@ all:libs $(TARGETNAME)
 
 $(TARGETNAME):$(OBJFILE) 
 	@mkdir -p $(OUTPUTDIR)
+#@echo "top pid : $$$$"
 #@echo "$$< : $<"
 #@echo "$$@ : $@"
 #@echo "$$^ : $^"
@@ -71,6 +72,7 @@ $(TARGETNAME):$(OBJFILE)
 
 %.o: %.c
 	@echo ""
+#@echo "%.o:%.c pid : $$$$"
 #@echo "$$< : $<"
 #@echo "$$@ : $@"
 #@echo "$$^ : $^"
