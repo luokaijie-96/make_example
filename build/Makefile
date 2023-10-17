@@ -53,8 +53,9 @@ $(TARGETNAME):$(OBJFILE)
 #@echo "$$< : $<"
 #@echo "$$@ : $@"
 #@echo "$$^ : $^"
-	@echo ""
 #@echo "${SHELL}"
+#@echo "CURDIR: ${CURDIR}"
+	@echo ""
 	@echo "all files have been compiled , now begin to link every obj for excutable file"
 	@echo ""
 	@echo "linking............"
@@ -73,6 +74,7 @@ $(TARGETNAME):$(OBJFILE)
 
 %.o: %.c
 	@echo ""
+#@echo "CURDIR: ${CURDIR}"
 #@echo "${SHELL}"
 #@echo "%.o:%.c pid : $$$$"
 #@echo "$$< : $<"
