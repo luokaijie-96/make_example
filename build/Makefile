@@ -54,6 +54,7 @@ $(TARGETNAME):$(OBJFILE)
 #@echo "$$@ : $@"
 #@echo "$$^ : $^"
 	@echo ""
+#@echo "${SHELL}"
 	@echo "all files have been compiled , now begin to link every obj for excutable file"
 	@echo ""
 	@echo "linking............"
@@ -72,6 +73,7 @@ $(TARGETNAME):$(OBJFILE)
 
 %.o: %.c
 	@echo ""
+#@echo "${SHELL}"
 #@echo "%.o:%.c pid : $$$$"
 #@echo "$$< : $<"
 #@echo "$$@ : $@"
@@ -102,8 +104,13 @@ cleanlibs :
 
 
 help:
-	@echo "Usage:"
-	@echo "       make"
-	@echo "       make arm"
-	@echo "       make libs"
-	@echo "       make all"
+	@echo "Usage:" 
+	@echo "       make" 
+	@echo "       make arm"  
+	@echo "       make libs" 
+	@echo "       make all"  
+#@echo -n "Usage:" ;           echo "    $$$$" \
+#echo -n "       make" ;      echo "    $$$$" \
+#echo -n "       make arm"  ; echo "    $$$$" \
+#echo -n "       make libs" ; echo "    $$$$" \
+#echo -n "       make all"  ; echo "    $$$$" 
