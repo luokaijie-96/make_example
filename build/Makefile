@@ -93,8 +93,10 @@ $(TARGETNAME):$(OBJFILE)
 arm:$(TARGETNAME)
 
 
+#上下两句等效
 libs :
-	@cd  $(LIBFILEDIRS); make; cd -	
+	@cd  $(LIBFILEDIRS); make
+#@cd  $(LIBFILEDIRS) && make 	
 
 
 clean: cleanlibs
