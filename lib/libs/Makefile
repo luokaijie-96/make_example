@@ -12,6 +12,7 @@ all :
 	@#2 使用gcc将.o文件编译成库文件
 	gcc -shared $(objs)  -o libmylib.so
 	sudo cp  libmylib.so  /usr/lib	
+	@echo "###################################################"	
 
 
 .PHONY : clean
@@ -19,3 +20,4 @@ all :
 
 clean :
 	@-sudo $(RM) $(objs) libmylib.so  /usr/lib/libmylib.so
+	@echo "###################################################"	

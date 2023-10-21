@@ -20,21 +20,23 @@ ifeq ($(INCLUDE_FLAG),1)
 COMPILEMACRO += INCLUDE_FLAG
 endif	
 
+export COMPILEMACRO
+
 #循环获取源文件和中间件
-SRCFILE := $(foreach dirpath,$(SRCCODEDIRS),$(wildcard $(addprefix $(dirpath)/*,.c)))
-OBJFILE := $(patsubst %.c,%.o,$(SRCFILE))
+export SRCFILE := $(foreach dirpath,$(SRCCODEDIRS),$(wildcard $(addprefix $(dirpath)/*,.c)))
+export OBJFILE := $(patsubst %.c,%.o,$(SRCFILE))
 
 #宏定义,源文件路径，头文件路径
-CURCMPLMACRO   := $(addprefix -D ,$(COMPILEMACRO))
-CURSRCHEADDIRS := $(addprefix -I ,$(SRCHEADDIRS))
-CURLIBHEADDIRS := $(addprefix -I ,$(LIBHEADDIRS))
+export CURCMPLMACRO   := $(addprefix -D ,$(COMPILEMACRO))
+export CURSRCHEADDIRS := $(addprefix -I ,$(SRCHEADDIRS))
+export CURLIBHEADDIRS := $(addprefix -I ,$(LIBHEADDIRS))
 
 #程序输出路径
 OUTPUTDIR := ../output
 
 #编译器及选项
-CC := gcc
-CFLAGS := -Wall -c
+export CC := gcc
+export CFLAGS := -Wall -c
 
 RM := rm
 RMFLAGS := -rf
@@ -43,12 +45,17 @@ RMFLAGS := -rf
 TARGETNAME = app
 
 
-all:libs $(TARGETNAME) 
+all:libs subsystem $(TARGETNAME)  
 
 
 
-$(TARGETNAME):$(OBJFILE) 
+#$(TARGETNAME):$(OBJFILE) 
+$(TARGETNAME): 
 	@mkdir -p $(OUTPUTDIR)
+	@echo "MAKEFLAGS: ${MAKEFLAGS}"
+	@echo "MAKEFILES: ${MAKEFILES}"
+	@echo "MAKELEVEL: ${MAKELEVEL}"
+	@echo "OBJFILE: ${OBJFILE}"
 #@echo "top pid : $$$$"
 #@echo "$$< : $<"
 #@echo "$$@ : $@"
@@ -59,7 +66,6 @@ $(TARGETNAME):$(OBJFILE)
 	@echo "all files have been compiled , now begin to link every obj for excutable file"
 	@echo ""
 	@echo "linking............"
-	@echo $(OBJFILE)
 	@$(CC)  -o $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION) $(OBJFILE) -L$(LIBFILEDIRS) $(LIBFILE)
 	@echo ""
 	@echo "linked ok," $(TARGETNAME) "has been created"
@@ -72,8 +78,15 @@ $(TARGETNAME):$(OBJFILE)
 #@echo "ldd $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION):"
 #@ldd $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION)
 
+
+
+
 %.o: %.c
 	@echo ""
+	@echo "MAKEFLAGS: ${MAKEFLAGS}"
+	@echo "MAKEFILES: ${MAKEFILES}"
+	@echo "MAKELEVEL: ${MAKELEVEL}"
+#@echo "$(SRCFILE_PRINT)"
 #@echo "CURDIR: ${CURDIR}"
 #@echo "${SHELL}"
 #@echo "%.o:%.c pid : $$$$"
@@ -88,9 +101,25 @@ $(TARGETNAME):$(OBJFILE)
 
 
 
-.PHONY: all arm clean help libs cleanlibs
 
-arm:$(TARGETNAME)
+
+
+.PHONY: all arm clean help libs cleanlibs subsystem  cleansubsystem
+
+
+# Makefile 中符号“$”有特殊的含义（表示变量或者函数的引用），在规则中需
+#要使用符号“$”的地方，需要书写两个连续的（“$$”）。
+#for循环的循环体要使用; 
+subsystem :
+	@for dir in $(SRCCODEDIRS);do \
+	echo "dir: $${dir}";          \
+	${MAKE} all -C $${dir};           \
+	done
+	
+
+
+arm:libs subsystem $(TARGETNAME)  
+
 
 
 #语句等效
@@ -100,12 +129,19 @@ libs :
 #@cd  $(LIBFILEDIRS) && $(MAKE) 
 
 
-clean: cleanlibs
+
+clean: cleanlibs  cleansubsystem
 	@-$(RM) $(RMFLAGS) $(TARGETNAME) $(OBJFILE) $(OUTPUTDIR)
 
 cleanlibs :
-	@cd  $(LIBFILEDIRS);  make clean; cd -	
+	$(MAKE) clean -C  $(LIBFILEDIRS)	
 	
+cleansubsystem :
+	@for code_obj in ${SRCCODEDIRS}; do  \
+		if [ -e $${code_obj} ];then            \
+			$(MAKE) clean -C  $${code_obj};    \
+		fi                                     \
+	done		
 
 
 help:

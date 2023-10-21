@@ -1,1 +1,1 @@
-INCLUDE_FLAG := 1
+export INCLUDE_FLAG := 1

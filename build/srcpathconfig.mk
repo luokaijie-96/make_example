@@ -1,18 +1,21 @@
 #源文件目录
-SRCCODEDIRS   :=../code/src/func \
-				../code/src/com \
+export SRCCODEDIRS   :=../code/src/com \
+               		   ../code/src/func \
 
 
 #头文件目录
-SRCHEADDIRS   :=../code/inc/func \
+export SRCHEADDIRS   :=../code/inc/func \
 				../code/inc/com \
 
 #lib文件目录
-LIBFILEDIRS := ../lib/libs
+export LIBFILEDIRS := ../lib/libs
 
 #lib头文件目录
-LIBHEADDIRS := ../lib/inc/
+export LIBHEADDIRS := ../lib/inc/
 
 #lib文件
-LIBFILE := -lmylib
+export LIBFILE := -lmylib
 
+
+unexport SRCCODEDIRS
+export SRCCODEDIRS
