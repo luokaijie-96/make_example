@@ -45,12 +45,12 @@ RMFLAGS := -rf
 TARGETNAME = app
 
 
-all:libs subsystem $(TARGETNAME)  
+all:$(TARGETNAME)  
 
 
 
 #$(TARGETNAME):$(OBJFILE) 
-$(TARGETNAME): 
+$(TARGETNAME): libs subsystem 
 	@mkdir -p $(OUTPUTDIR)
 	@echo "MAKEFLAGS: ${MAKEFLAGS}"
 	@echo "MAKEFILES: ${MAKEFILES}"
@@ -66,7 +66,7 @@ $(TARGETNAME):
 	@echo "all files have been compiled , now begin to link every obj for excutable file"
 	@echo ""
 	@echo "linking............"
-	@$(CC)  -o $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION) $(OBJFILE) -L$(LIBFILEDIRS) $(LIBFILE)
+	$(CC)  -o $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION) $(OBJFILE) -L$(LIBFILEDIRS) $(LIBFILE)
 	@echo ""
 	@echo "linked ok," $(TARGETNAME) "has been created"
 	@echo ""
@@ -118,9 +118,10 @@ subsystem :
 	
 
 
-arm:libs subsystem $(TARGETNAME)  
+arm:$(TARGETNAME)  
 
 
+	
 
 #语句等效
 libs :
