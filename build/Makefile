@@ -81,23 +81,23 @@ $(TARGETNAME): libs subsystem
 
 
 
-%.o: %.c
-	@echo ""
-	@echo "MAKEFLAGS: ${MAKEFLAGS}"
-	@echo "MAKEFILES: ${MAKEFILES}"
-	@echo "MAKELEVEL: ${MAKELEVEL}"
-#@echo "$(SRCFILE_PRINT)"
-#@echo "CURDIR: ${CURDIR}"
-#@echo "${SHELL}"
-#@echo "%.o:%.c pid : $$$$"
-#@echo "$$< : $<"
-#@echo "$$@ : $@"
-#@echo "$$^ : $^"
-	@echo "start " $< "......compiling"
-	@$(CC) $(CURCMPLMACRO) $(CFLAGS) $(CURSRCHEADDIRS) $(CURLIBHEADDIRS) $< -o $@
-	@echo "created " $@
-	@echo "end   " $< "......compiled ok"
-	@echo ""
+#%.o: %.c
+#	@echo ""
+#	@echo "MAKEFLAGS: ${MAKEFLAGS}"
+#	@echo "MAKEFILES: ${MAKEFILES}"
+#	@echo "MAKELEVEL: ${MAKELEVEL}"
+##@echo "$(SRCFILE_PRINT)"
+##@echo "CURDIR: ${CURDIR}"
+##@echo "${SHELL}"
+##@echo "%.o:%.c pid : $$$$"
+##@echo "$$< : $<"
+##@echo "$$@ : $@"
+##@echo "$$^ : $^"
+#	@echo "start " $< "......compiling"
+#	@$(CC) $(CURCMPLMACRO) $(CFLAGS) $(CURSRCHEADDIRS) $(CURLIBHEADDIRS) $< -o $@
+#	@echo "created " $@
+#	@echo "end   " $< "......compiled ok"
+#	@echo ""
 
 
 
@@ -112,7 +112,6 @@ $(TARGETNAME): libs subsystem
 #for循环的循环体要使用; 
 subsystem :
 	@for dir in $(SRCCODEDIRS);do \
-	echo "dir: $${dir}";          \
 	${MAKE} all -C $${dir};           \
 	done
 	
