@@ -17,16 +17,21 @@ done)
 SSOBJ := $(patsubst %.c,%.o,$(SSSRC)) 
 
 
+define  echo_func
+	echo "SSSRC: ${SSSRC}"
+	echo "SSOBJ: ${SSOBJ}"
+	echo "SRCCODEDIRS: ${SRCCODEDIRS}"
+	echo "MAKEFLAGS: ${MAKEFLAGS}"
+	echo "MAKEFILES: ${MAKEFILES}"
+	echo "MAKELEVEL: ${MAKELEVEL}"
+	echo "SRCFILE:   $(notdir ${SRCFILE})"
+	echo "OBJFILE:   $(notdir ${OBJFILE})"
+endef
+
+
 # gcc -c, -c 代表只编译，不链接
 all: ${SSOBJ} 
-	@echo "SSSRC: ${SSSRC}"
-	@echo "SSOBJ: ${SSOBJ}"
-	@echo "SRCCODEDIRS: ${SRCCODEDIRS}"
-	@echo "MAKEFLAGS: ${MAKEFLAGS}"
-	@echo "MAKEFILES: ${MAKEFILES}"
-	@echo "MAKELEVEL: ${MAKELEVEL}"
-	@echo "SRCFILE:   $(notdir ${SRCFILE})"
-	@echo "OBJFILE:   $(notdir ${OBJFILE})"
+	@$(echo_func)
 #@for code_src in ${SRC}; do  \
 #		if [ -e $${code_src} ];then              \
 #			$(CC) $(CURCMPLMACRO) $(CFLAGS) $(CURSRCHEADDIRS) \
@@ -46,16 +51,24 @@ all: ${SSOBJ}
 depend: $(DEPEND_OBJ)
 	
 
-include main.mk
 
-
-%.mk: %.c 
+define  mk_fun
 	@echo "create .mk  files begin..."
 	$(CC)  $(CFLAGS) -M $< $(CURSRCHEADDIRS) $(CURLIBHEADDIRS) > $@.$$$$; \
 	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$ 
 	@echo "create .mk  files finish..."
 	@echo "********************"	
+endef
+
+
+
+include main.mk
+
+
+%.mk: %.c 
+	$(mk_fun)
+
 
 
 clean:
