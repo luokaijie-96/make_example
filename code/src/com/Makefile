@@ -16,8 +16,12 @@ done)
 
 SSOBJ := $(patsubst %.c,%.o,$(SSSRC)) 
 
+nullstring :=
+space := $(nullstring) #end of the line
+
 
 define  echo_func
+	echo "[$(space)]"
 	echo "SSSRC: ${SSSRC}"
 	echo "SSOBJ: ${SSOBJ}"
 	echo "SRCCODEDIRS: ${SRCCODEDIRS}"
