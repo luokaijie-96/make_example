@@ -5,14 +5,21 @@ CFLAGS += -c
 objs := mylib.o  mylib_test1.o  mylib_test2.o
 
 
+ifeq ($(MAKELEVEL),0)
+all : msg
+else
 all : $(objs) 
 	@#2 使用gcc将.o文件编译成库文件
 	gcc -shared $^  -o libmylib.so
 #gcc -shared $?  -o libmylib.so
 	sudo cp  libmylib.so  /usr/lib	
 	@echo "###################################################"	
+endif
 
 
+
+msg:
+	@echo "Can not make in this directory!"
 
 
 .PHONY : clean  
