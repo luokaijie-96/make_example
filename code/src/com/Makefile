@@ -23,7 +23,7 @@ space := $(nullstring) #end of the line
 define  echo_func
 	echo "[$(space)]"
 	echo "SSSRC: ${SSSRC}"
-	echo "SSOBJ: ${SSOBJ}"
+	echo "SSOBJ: $(SSSRC: %.o=%.c)"
 	echo "SRCCODEDIRS: ${SRCCODEDIRS}"
 	echo "MAKEFLAGS: ${MAKEFLAGS}"
 	echo "MAKEFILES: ${MAKEFILES}"
