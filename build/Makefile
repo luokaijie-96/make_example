@@ -9,6 +9,16 @@ TMPBUILDTM = $(tmpbuildtm)
 APPVERSION = 1.0.0.0
 
 
+# define 属于递归展开式变量定义
+define two-lines 
+echo "pid:$$$$" 
+echo "first line" 
+echo "CFLAGS: $(CFLAGS)" 
+echo "pid:$$$$" 
+endef 
+
+
+
 #不同的目标采用不同的宏定义
 ifeq ($(MAKECMDGOALS),arm)
 COMPILEMACRO += COMPILER_IS_ARM_LINUX_GCC
@@ -45,6 +55,12 @@ RMFLAGS := -rf
 
 #目标文件    
 TARGETNAME = app
+
+
+
+
+
+
 
 
 all:$(TARGETNAME)  
@@ -127,7 +143,8 @@ arm:$(TARGETNAME)
 
 
 debug:
-	@echo "CFLAGS: $(CFLAGS)"
+	@$(two-lines)
+#@echo "CFLAGS: $(CFLAGS)"
 	
 
 #语句等效
