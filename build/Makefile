@@ -38,6 +38,8 @@ OUTPUTDIR := ../output
 export CC := gcc
 export CFLAGS := -Wall -c
 
+#override CFLAGS += -g
+
 RM := rm
 RMFLAGS := -rf
 
@@ -106,7 +108,7 @@ $(TARGETNAME): libs subsystem
 
 
 
-.PHONY: all arm clean help libs cleanlibs subsystem  cleansubsystem
+.PHONY: all arm clean help libs cleanlibs subsystem  cleansubsystem  debug
 
 
 # Makefile 中符号“$”有特殊的含义（表示变量或者函数的引用），在规则中需
@@ -122,6 +124,10 @@ subsystem :
 arm:$(TARGETNAME)  
 
 
+
+
+debug:
+	@echo "CFLAGS: $(CFLAGS)"
 	
 
 #语句等效
