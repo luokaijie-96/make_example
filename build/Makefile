@@ -67,6 +67,8 @@ $(TARGETNAME): libs subsystem
 	@echo ""
 	@echo "linking............"
 	$(CC)  -o $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION) $(OBJFILE) -L$(LIBFILEDIRS) $(LIBFILE)
+	objdump  -t  $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION)     > $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION).symbol.txt  
+	objdump  -d -S  $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION)  > $(OUTPUTDIR)/$(TARGETNAME).$(APPVERSION).lst  
 	@echo ""
 	@echo "linked ok," $(TARGETNAME) "has been created"
 	@echo ""
