@@ -15,6 +15,7 @@ echo "pid:$$$$"
 echo "first line" 
 echo "CFLAGS: $(CFLAGS)" 
 echo "pid:$$$$" 
+echo "$(PATH)" 
 endef 
 
 
