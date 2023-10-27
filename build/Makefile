@@ -19,6 +19,7 @@ echo "$(PATH)"
 endef 
 
 
+PATH := test_path
 
 #不同的目标采用不同的宏定义
 ifeq ($(MAKECMDGOALS),arm)
