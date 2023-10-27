@@ -19,7 +19,6 @@ echo "$(PATH)"
 endef 
 
 
-PATH := test_path
 
 #不同的目标采用不同的宏定义
 ifeq ($(MAKECMDGOALS),arm)
@@ -143,10 +142,23 @@ arm:$(TARGETNAME)
 
 
 
-
+#命令行前的“+”的意思 告诉 make，即使 make 使用了“-t”参数，“+”之后的命令都需要被执行。
+ifneq (,$(findstring t,$(MAKEFLAGS)))
+MYFLAGS := "cmdline_valid"
 debug:
-	@$(two-lines)
+	+@echo "MAKEFLAGS: $(MAKEFLAGS)"
+	+@echo "MYFLAGS: $(MYFLAGS)"
+#@$(two-lines)
 #@echo "CFLAGS: $(CFLAGS)"
+else
+MYFLAGS := "cmdline_inval"
+debug:
+	@echo "MAKEFLAGS: $(MAKEFLAGS)"
+	@echo "MYFLAGS: $(MYFLAGS)"
+#@$(two-lines)
+#@echo "CFLAGS: $(CFLAGS)"
+endif
+
 	
 
 #语句等效
