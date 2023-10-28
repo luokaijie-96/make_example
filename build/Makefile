@@ -126,7 +126,7 @@ $(TARGETNAME): libs subsystem
 
 
 .PHONY: all arm clean help libs cleanlibs subsystem  cleansubsystem  debug \
-		findsrc
+		findsrc  value_fun
 
 
 # Makefile 中符号“$”有特殊的含义（表示变量或者函数的引用），在规则中需
@@ -191,6 +191,10 @@ findsrc :
 	@echo "$(files)"
 	
 	
+FOO = $SHELL
+value_fun:
+	@echo $(FOO)
+	@echo $(value FOO)
 
 
 help:
@@ -201,6 +205,7 @@ help:
 	@echo "       make all"  
 	@echo "       make debug"  
 	@echo "       make findsrc"  
+	@echo "       make value_fun"  
 #@echo -n "Usage:" ;           echo "    $$$$" \
 #echo -n "       make" ;      echo "    $$$$" \
 #echo -n "       make arm"  ; echo "    $$$$" \
