@@ -125,7 +125,8 @@ $(TARGETNAME): libs subsystem
 
 
 
-.PHONY: all arm clean help libs cleanlibs subsystem  cleansubsystem  debug
+.PHONY: all arm clean help libs cleanlibs subsystem  cleansubsystem  debug \
+		findsrc
 
 
 # Makefile 中符号“$”有特殊的含义（表示变量或者函数的引用），在规则中需
@@ -183,12 +184,23 @@ cleansubsystem :
 	done		
 
 
+
+find_files = $(wildcard $(dir)/*)	
+files := $(foreach dir,$(SRCCODEDIRS),$(find_files))								
+findsrc :
+	@echo "$(files)"
+	
+	
+
+
 help:
 	@echo "Usage:" 
 	@echo "       make" 
 	@echo "       make arm"  
 	@echo "       make libs" 
 	@echo "       make all"  
+	@echo "       make debug"  
+	@echo "       make findsrc"  
 #@echo -n "Usage:" ;           echo "    $$$$" \
 #echo -n "       make" ;      echo "    $$$$" \
 #echo -n "       make arm"  ; echo "    $$$$" \
