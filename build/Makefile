@@ -54,6 +54,13 @@ export CFLAGS := -Wall -c
 RM := rm
 RMFLAGS := -rf
 
+#静态库
+#export LIB_TYPE := static
+#动态库
+export LIB_TYPE := dynamic
+
+
+
 #目标文件    
 TARGETNAME = app
 

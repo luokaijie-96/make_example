@@ -3,5 +3,9 @@
 
 void mylib()
 {
-    printf("This is mylib()\r\n");
+#ifdef  LIB_TYPE_STATIC    
+    printf("This is static mylib()\r\n");
+#else
+    printf("This is dynamic mylib()\r\n");
+#endif
 }
