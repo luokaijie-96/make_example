@@ -10,6 +10,9 @@ endif
 CFLAGS += -c
 
 
+CFLAGS := $(sort $(CFLAGS))
+
+
 objs := mylib.o  mylib_test1.o  mylib_test2.o
 
 

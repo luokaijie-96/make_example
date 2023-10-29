@@ -1,9 +1,10 @@
 CURSRCHEADDIRS += -I../../../code/inc/func/
 CURLIBHEADDIRS += -I../../../lib/inc/
 
-CFLAGS+= $(CURSRCHEADDIRS)
-CFLAGS+= $(CURLIBHEADDIRS)
-CFLAGS+= $(CURCMPLMACRO)
+
+
+CFLAGS := $(sort $(CFLAGS))	
+CURSRCHEADDIRS := $(sort $(CURSRCHEADDIRS))	
 
 DEPEND_OBJ := fun.mk
 

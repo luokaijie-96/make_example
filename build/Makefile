@@ -38,9 +38,9 @@ export SRCFILE := $(foreach dirpath,$(SRCCODEDIRS),$(wildcard $(addprefix $(dirp
 export OBJFILE := $(patsubst %.c,%.o,$(SRCFILE))
 
 #宏定义,源文件路径，头文件路径
-export CURCMPLMACRO   := $(addprefix -D ,$(COMPILEMACRO))
-export CURSRCHEADDIRS := $(addprefix -I ,$(SRCHEADDIRS))
-export CURLIBHEADDIRS := $(addprefix -I ,$(LIBHEADDIRS))
+export CURCMPLMACRO   := $(addprefix -D,$(COMPILEMACRO))
+export CURSRCHEADDIRS := $(addprefix -I,$(SRCHEADDIRS))
+export CURLIBHEADDIRS := $(addprefix -I,$(LIBHEADDIRS))
 
 #程序输出路径
 OUTPUTDIR := ../output
