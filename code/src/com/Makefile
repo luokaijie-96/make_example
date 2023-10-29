@@ -66,9 +66,9 @@ define  mk_fun
 endef
 
 
-
+ifneq ($(MAKECMDGOALS),clean)
 include main.mk
-
+endif
 
 %.mk: %.c 
 	$(mk_fun)

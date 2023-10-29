@@ -46,7 +46,9 @@ all: ${SSOBJ}
 depend: $(DEPEND_OBJ)
 	
 
+ifneq ($(MAKECMDGOALS),clean)
 include fun.mk
+endif
 
 
 %.o : %.c
