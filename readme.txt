@@ -98,3 +98,78 @@ gcc -o main2 main.c -I./include -L./lib -ltest2
 -I: （大写 i,include的第一个字母 ）指定main.c文件用到的头文件head.h所在的路径
 -L：（libarary）指定要连接的库的所在目录
 -l：（小写的 L,link ）指定链接时需要的静态库, 去掉前缀和后缀
+
+
+
+
+objdump -t app.1.0.0.0 > app.symbol.txt
+objdump -d -S  app.1.0.0.0 > app.lst
+
+
+
+
+
+
+
+
+
+
+
+
+查看.a文件方法
+要查看.a文件的内容，可以使用ar命令。下面是一些常见的用法：
+
+列出.a文件中包含的所有文件：
+ar t <filename.a>
+1、提取.a文件中的单个文件：
+ar x <filename.a> <filename.o>
+
+2、将.a文件中的所有文件提取到当前目录：
+ar x <filename.a>
+
+3、在.a文件中添加新文件：
+ar r <filename.a> <filename.o>
+
+4、替换.a文件中的现有文件：
+ar r <filename.a> <filename.o>
+
+请注意，.a文件通常是静态库文件，包含编译后的目标文件。如果您想查看目标文件的内容，可以使用objdump或readelf等工具。
+
+SO文件查询
+要查看.so文件的内容，你可以使用以下命令：
+
+列出.so文件中包含的符号表：
+nm -D <filename.so>
+
+1、列出.so文件中包含的所有函数和变量：
+objdump -T <filename.so>
+
+2、查看.so文件中某个函数的汇编代码：
+objdump -d -M intel <filename.so> | grep <function_name>
+
+3、查看.so文件的头部信息：
+readelf -h <filename.so>
+
+请注意，.so文件通常是共享库文件，包含已编译的可重定位目标文件。这些命令将允许查看.so文件中的各种元素，例如符号表、函数、变量和汇编代码。
+
+命令介绍
+nm是"Symbol table Namer"的缩写。nm命令可以列出目标文件中定义和引用的符号，并且可以根据不同的选项以不同的格式显示这些符号信息。在Linux系统上，nm命令通常与C/C++编译器一起使用，用于查看编译后的二进制文件（例如可执行文件、静态库文件、共享库文件）中的符号表信息。
+
+
+
+nm libmylib.a 
+
+mylib.o:
+0000000000000000 T mylib
+U puts
+
+mylib_test1.o:
+0000000000000010 r __func__.2286
+0000000000000000 T mylib_test1
+U printf
+
+mylib_test2.o:
+0000000000000010 r __func__.2286
+0000000000000000 T mylib_test2
+U printf
+

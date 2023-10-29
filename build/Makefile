@@ -55,9 +55,9 @@ RM := rm
 RMFLAGS := -rf
 
 #静态库
-#export LIB_TYPE := static
+export LIB_TYPE := static
 #动态库
-export LIB_TYPE := dynamic
+#export LIB_TYPE := dynamic
 
 
 
